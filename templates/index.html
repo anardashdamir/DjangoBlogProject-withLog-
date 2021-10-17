@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+        <div class="jumbotron text-center">
+            <h3>Proqramçılıq haqqındakı bloga xoş gəldiniz</h3>
+            <p>Bu blogda siz də proqramlaşdırmayla bağlı öz deneyimləriniziç suallarınızı yaza bilər, həmdə digərlərinin
+                suallarına cavablaya bilərsiniz</p>
+        </div>
+
+        <p>
+
+                {% if request.user.is_authenticated %}
+                        Logged in, {{request.user.username}}
+                {% else %}
+                        NO log
+
+                {% endif %}
+
+
+
+        </p>
+
+
+
+{% endblock body %}

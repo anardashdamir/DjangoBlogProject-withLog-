@@ -1,0 +1,83 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <h3>Articles</h3>
+        <hr>
+
+    </div>
+
+</div>
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+             <form >
+                 {% csrf_token %}
+                <input name="keyword" type="text" class="inputl input-sm" maxlength="64" placeholder="Axtar">
+                <button type="submit" class="btn btn-info ">Search</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+{% if articles %}
+
+{% for article in articles  %}
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+    <div class="col-lg-8">
+        <!-- Post header-->
+        <header class="mb-4">
+            <!-- Post title-->
+            <h2 class="fw-bolder mb-1">{{article.title}}</h2>
+            <!-- Post meta content-->
+            <div class="text-muted fst-italic mb-2">{{article.created_date}} by {{article.author}}</div>
+            <hr>
+
+        </header>
+
+        <!-- Preview image figure-->
+
+        {% if article.article_image %}
+        <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="Picture">
+        {% endif %}
+
+        <!-- Post content -->
+        <p class="lead">
+            {{article.content | safe | truncatewords:10}}<a href="/articles/article/{{article.id}}">read</a>
+        </p>
+
+
+
+    </div>
+
+</div>
+</div>
+{% endfor %}
+
+
+
+{% else %}
+<div class="row">
+    <div class="col-md-10 offset-md-3">
+        <div class="col-lg-8">
+            <div class="alert alert-warning">
+                empty
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+{% endblock body %}

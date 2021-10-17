@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+
+{% block body %}
+<h3>Control Panel</h3>
+<hr>
+<p>
+     <strong style="color :rgb(78, 71, 58)">{{request.user.username}}</strong>
+</p>
+<hr>
+<a href="/articles/addarticle" class="btn btn-info">Add Article</a>
+<br> <br>
+
+{% if articles %}
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Date</th>
+            <th scope="col" style="color: rgb(30, 112, 105);">Update</th>
+            <th scope="col" style="color: rgb(190, 81, 81);">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for article in articles %}
+        <tr>
+            <th scope="row">{{article.id}}</th>
+            <td><a href="/articles/article/{{article.id}}">{{article.title}}</a></td>
+            <td>{{article.author.username}}</td>
+            <td>{{article.created_date}}</td>
+            <td><a href="/articles/update/{{article.id}}" class="btn btn-info">Update</a></td>
+            <td><a href="/articles/delete/{{article.id}}" class="btn btn-danger">Delete</a></td>
+        </tr>
+
+        {% endfor %}
+
+    </tbody>
+</table>
+
+{% else %}
+<div class="alert alert-warning">
+    You have not an article yet!
+
+</div>
+
+{% endif %}
+
+
+
+{% endblock body %}
